@@ -24,7 +24,7 @@ router.post('/TEST', async (req, res) => {
 });
 
 
-router.post('/getsap/getincomming_2', async (req, res) => {
+router.post('/datacentertest/getsap', async (req, res) => {
   //-------------------------------------
   console.log("----getsap/getincomming_2----");
   console.log(req.body);
