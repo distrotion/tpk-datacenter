@@ -109,43 +109,56 @@ router.post('/datacentertest/getsoi8order', async (req, res) => {
 
       let queryS = `SELECT * FROM [ScadaReport].[dbo].[PMIXprocessinfo] where NumOrder = '${input[`ORDER`]}' order by RecordTimeStart desc`
       let db = await mssql.qurey(queryS);
-      output = db
+      let datadb = db['recordsets'][0];
+      output = datadb
+
 
     }else if (input[`PLANT`] === 'coilcoating') {
 
       let queryS = `SELECT * FROM [ScadaReport].[dbo].[CoilProcessinfo] where NumOrder = '${input[`ORDER`]}' order by RecordTimeStart desc`
       let db = await mssql.qurey(queryS);
-      output = db
+      let datadb = db['recordsets'][0];
+      output = datadb
+
 
     }else if (input[`PLANT`] === 'hydro') {
 
       let queryS = `SELECT * FROM [ScadaReport].[dbo].[HydroProcessinfo] where NumOrder = '${input[`ORDER`]}' order by RecordTimeStart desc`
       let db = await mssql.qurey(queryS);
-      output = db
+      let datadb = db['recordsets'][0];
+      output = datadb
+
 
     }else if (input[`PLANT`] === 'plx') {
 
       let queryS = `SELECT * FROM [ScadaReport].[dbo].[PLXprocessinfo] where NumOrder = '${input[`ORDER`]}' order by RecordTimeStart desc`
       let db = await mssql.qurey(queryS);
-      output = db
+      let datadb = db['recordsets'][0];
+      output = datadb
+
 
     }else if (input[`PLANT`] === 'liquid') {
 
       let queryS = `SELECT * FROM [ScadaReport].[dbo].[LQprocessinfo] where NumOrder = '${input[`ORDER`]}' order by RecordTimeStart desc`
       let db = await mssql.qurey(queryS);
-      output = db
+      let datadb = db['recordsets'][0];
+      output = datadb
+
 
     }else if (input[`PLANT`] === 'powder') {
 
       let queryS = `SELECT * FROM [ScadaReport].[dbo].[PMProcessinfo] where NumOrder = '${input[`ORDER`]}' order by RecordTimeStart desc`
       let db = await mssql.qurey(queryS);
-      output = db
+      let datadb = db['recordsets'][0];
+      output = datadb
+
 
     }else if (input[`PLANT`] === 'noxrust') {
 
       let queryS = `SELECT * FROM [ScadaReport].[dbo].[NoxProcessinfo] where NumOrder = '${input[`ORDER`]}' order by RecordTimeStart desc`
       let db = await mssql.qurey(queryS);
-      output = db
+      let datadb = db['recordsets'][0];
+      output = datadb
 
     }
 
