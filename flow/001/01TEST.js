@@ -98,7 +98,7 @@ router.post('/datacentertest/getsoi8set', async (req, res) => {
 
 router.post('/datacentertest/getsoi8order', async (req, res) => {
   //-------------------------------------
-  console.log("----getsap/getincomming_2----");
+  console.log("----datacentertest/getincomming_2----");
   console.log(req.body);
   let input = req.body;
   //-------------------------------------
@@ -156,6 +156,77 @@ router.post('/datacentertest/getsoi8order', async (req, res) => {
     }else if (input[`PLANT`] === 'noxrust') {
 
       let queryS = `SELECT * FROM [ScadaReport].[dbo].[NoxProcessinfo] where NumOrder = '${input[`ORDER`]}' order by RecordTimeStart desc`
+      let db = await mssql.qurey(queryS);
+      let datadb = db['recordsets'][0];
+      output = datadb
+
+    }
+
+  }
+
+  return res.json(output);
+});
+
+router.post('/datacentertest/getsoi8order-pack', async (req, res) => {
+  //-------------------------------------
+  console.log("----datacentertest/getsoi8order-pack----");
+  console.log(req.body);
+  let input = req.body;
+  //-------------------------------------
+  let output = [];
+  if (input[`PLANT`] !== undefined && input[`ORDER`] !== undefined) {
+
+    if (input[`PLANT`] === 'premix') {
+
+      let queryS = `SELECT * FROM [ScadaReport].[dbo].[PMIXpackinginfo] where NumOrder = '${input[`ORDER`]}' order by RecordTimeStart desc`
+      let db = await mssql.qurey(queryS);
+      let datadb = db['recordsets'][0];
+      output = datadb
+
+
+    }else if (input[`PLANT`] === 'coilcoating') {
+
+      let queryS = `SELECT * FROM [ScadaReport].[dbo].[CoilPackinginfo] where NumOrder = '${input[`ORDER`]}' order by RecordTimeStart desc`
+      let db = await mssql.qurey(queryS);
+      let datadb = db['recordsets'][0];
+      output = datadb
+
+
+    }else if (input[`PLANT`] === 'hydro') {
+
+      let queryS = `SELECT * FROM [ScadaReport].[dbo].[HydroPackinginfo] where NumOrder = '${input[`ORDER`]}' order by RecordTimeStart desc`
+      let db = await mssql.qurey(queryS);
+      let datadb = db['recordsets'][0];
+      output = datadb
+
+
+    }else if (input[`PLANT`] === 'plx') {
+
+      let queryS = `SELECT * FROM [ScadaReport].[dbo].[PLXpackinginfo] where NumOrder = '${input[`ORDER`]}' order by RecordTimeStart desc`
+      let db = await mssql.qurey(queryS);
+      let datadb = db['recordsets'][0];
+      output = datadb
+
+
+    }else if (input[`PLANT`] === 'liquid') {
+
+      let queryS = `SELECT * FROM [ScadaReport].[dbo].[LQpackinginfo] where NumOrder = '${input[`ORDER`]}' order by RecordTimeStart desc`
+      let db = await mssql.qurey(queryS);
+      let datadb = db['recordsets'][0];
+      output = datadb
+
+
+    }else if (input[`PLANT`] === 'powder') {
+
+      let queryS = `SELECT * FROM [ScadaReport].[dbo].[PMpackinginfo] where NumOrder = '${input[`ORDER`]}' order by RecordTimeStart desc`
+      let db = await mssql.qurey(queryS);
+      let datadb = db['recordsets'][0];
+      output = datadb
+
+
+    }else if (input[`PLANT`] === 'noxrust') {
+
+      let queryS = `SELECT * FROM [ScadaReport].[dbo].[Noxpackinginfo] where NumOrder = '${input[`ORDER`]}' order by RecordTimeStart desc`
       let db = await mssql.qurey(queryS);
       let datadb = db['recordsets'][0];
       output = datadb
