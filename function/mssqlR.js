@@ -1,9 +1,9 @@
 const sql = require('mssql');
 const config = {
-  user: "",
-  password: "",
+  user: "sa",
+  password: "Automatic",
   database: "",
-  server: '',
+  server: '172.23.10.39',
   pool: {
     // max: 10,
     // min: 0,
@@ -15,21 +15,20 @@ const config = {
   }
 }
 
-exports.qureyR = async (input) => {
+exports.qurey = async (input) => {
   try {
     await sql.connect(config)
-    
     const result = await sql.query(input).then((v) => {
-      // console.log(`---------------`);
-      // console.log(v);  
-      out = v;   
-      // console.log(`---------------`);
-      return v;
+        // console.log(`---------------`);
+        // console.log(v);  
+        out = v;   
+        // console.log(`---------------`);
+        return v;
+      
+      }).then(() => sql.close())
     
-    }).then(() => sql.close())
-  
-    //  console.dir(result)
-    return out;
+      //  console.dir(result)
+      return out;
   } catch (err) {
     return err;
   }

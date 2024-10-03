@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 var mssql = require('../../function/mssql');
+var mssqlR = require('../../function/mssqlR');
 var mongodb = require('../../function/mongodb');
 var httpreq = require('../../function/axios');
 var axios = require('axios');
@@ -109,6 +110,7 @@ router.post('/datacentertest/getsoi8order', async (req, res) => {
 
       let queryS = `SELECT * FROM [ScadaReport].[dbo].[PMIXprocessinfo] where NumOrder = '${input[`ORDER`]}' order by RecordTimeStart desc`
       let db = await mssql.qurey(queryS);
+ 
       let datadb = db['recordsets'][0];
       output = datadb
 
@@ -239,4 +241,34 @@ router.post('/datacentertest/getsoi8order-pack', async (req, res) => {
 });
 
 
+router.post('/datacentertest/planning', async (req, res) => {
+  //-------------------------------------
+  console.log("----datacentertest/planning----");
+  console.log(req.body);
+  let input = req.body;
+  //-------------------------------------
+  let output = [];
+  if (input[`day`] !== undefined && input[`monyh`] !== undefined&& input[`year`] !== undefined) {
+
+
+      let queryS = ` SELECT * FROM [SOI8_INVs].[dbo].[incomming] WHERE Bsc_start='${input[`monyh`]}-${input[`day`]}-${input[`year`]}' order by Bsc_start desc`
+      console.log(queryS)
+      let db = await mssqlR.qurey(queryS);
+      console.log(db)
+    if(db['recordsets'].length>0){
+      let datadb = db['recordsets'][0];
+      output = datadb
+    }
+    
+
+
+    
+
+  }
+
+  return res.json(output);
+});
+
+
 module.exports = router;
+
